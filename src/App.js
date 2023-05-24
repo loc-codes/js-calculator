@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Button from "./Components/Button";
+import Number from "./Components/Number";
 import Screen from "./Components/Screen";
+import Operator from "./Components/Operator";
 
 function App() {
   const output = 'output: '
@@ -14,24 +15,24 @@ function App() {
   return (
     <div className="App">
       <Screen display={state}/>
-      <Button text="0" pressed={updateDisplay}/>
-      <Button text="1" pressed={updateDisplay}/>
-      <Button text="2" pressed={updateDisplay}/>
-      <Button text="3" pressed={updateDisplay}/>
-      <Button text="4" pressed={updateDisplay}/>
-      <Button text="5" pressed={updateDisplay}/>
-      <Button text="6" pressed={updateDisplay}/>
-      <Button text="7" pressed={updateDisplay}/>
-      <Button text="8" pressed={updateDisplay}/>
-      <Button text="9" pressed={updateDisplay}/>
-      <Button text="0" pressed={updateDisplay}/>
-      <Button text="."/>
-      <Button text="AC"/>
-      <Button text="+" pressed={updateDisplay}/>
-      <Button text="-" pressed={updateDisplay}/>
-      <Button text="*" pressed={updateDisplay}/>
-      <Button text="/" pressed={updateDisplay}/>
-      <Button text="=" pressed={updateDisplay}/>
+      <Number text="0" pressed={updateDisplay}/>
+      <Number text="1" pressed={updateDisplay}/>
+      <Number text="2" pressed={updateDisplay}/>
+      <Number text="3" pressed={updateDisplay}/>
+      <Number text="4" pressed={updateDisplay}/>
+      <Number text="5" pressed={updateDisplay}/>
+      <Number text="6" pressed={updateDisplay}/>
+      <Number text="7" pressed={updateDisplay}/>
+      <Number text="8" pressed={updateDisplay}/>
+      <Number text="9" pressed={updateDisplay}/>
+      <Number text="0" pressed={updateDisplay}/>
+      <Number text="." pressed={updateDisplay}/>
+      <Operator text="AC"/>
+      <Operator text="+" pressed={updateDisplay}/>
+      <Operator text="-" pressed={updateDisplay}/>
+      <Operator text="*" pressed={updateDisplay}/>
+      <Operator text="/" pressed={updateDisplay}/>
+      <Operator text="=" pressed={updateDisplay}/>
     </div>
   );
 }
