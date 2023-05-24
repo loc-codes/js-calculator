@@ -1,8 +1,12 @@
 import Button from "./Components/Button";
+import Screen from "./Components/Screen";
 
 function App() {
+  const output = "output: "
+
   return (
     <div className="App">
+      <Screen display={output} />
       <Button text="0" />
       <Button text="1"/>
       <Button text="2"/>

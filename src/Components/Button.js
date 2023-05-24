@@ -1,7 +1,12 @@
 
 const Button = (props) => {
+    const handleClick = () => {
+        console.log('you clicked ' + props.text)
+        output += props.text
+    }
+
     return (
-        <button>
+        <button onClick={handleClick}>
             <p>{props.text}</p>
         </button>
     )
