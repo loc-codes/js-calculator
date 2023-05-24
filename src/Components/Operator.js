@@ -1,15 +1,15 @@
 
-const Button = (props) => {
+const Operator = (props) => {
     const handleClick = () => {
-        console.log('you clicked ' + props.text)
-        props.pressed(props.text)   
+        console.log('you clicked ' + props.operator)
+        props.pressed(props.operator)
     }
 
     return (
         <button onClick={handleClick}>
-            <p>{props.text}</p>
+            <p>{props.operator}</p>
         </button>
     )
 }
 
-export default Button
+export default Operator

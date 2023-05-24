@@ -1,13 +1,13 @@
 
 const Number = (props) => {
     const handleClick = () => {
-        console.log('you clicked ' + props.text)
-        props.pressed(props.text)
+        console.log('you clicked ' + props.number)
+        props.pressed(props.number)
     }
 
     return (
         <button onClick={handleClick}>
-            <p>{props.text}</p>
+            <p>{props.number}</p>
         </button>
     )
 }

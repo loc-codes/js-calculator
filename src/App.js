@@ -4,37 +4,58 @@ import Screen from "./Components/Screen";
 import Operator from "./Components/Operator";
 
 function App() {
-  const output = 'output: '
+  
+  // State 1: The Operand State
+  const [operand, updateOperand] = useState(() => {return ''})
 
-  const [state, setState] = useState(() => {return 'output: '})
+  //State 2: The Expression State
+  const [expression, setExpression] = useState(() => {return ''})
 
-  const updateDisplay = (text) => {
-    setState(prevState => prevState + text)
+  
+  const [display, setDisplay] = useState(() => {return 'display: '})
+  
+
+  const numberPress = (number, display) => {
+    console.log(display)
+    updateOperand(prevOperand => prevOperand += number)
+    setDisplay(prevDisplay => prevDisplay += number)
+  }
+
+  const operatorPress = (operator) => {
+    setExpression(prevExpression => prevExpression + operand)
+    updateOperand('')
+    setDisplay(`display: ${operator}`)
   }
 
   return (
     <div className="App">
-      <Screen display={state}/>
-      <Number text="0" pressed={updateDisplay}/>
-      <Number text="1" pressed={updateDisplay}/>
-      <Number text="2" pressed={updateDisplay}/>
-      <Number text="3" pressed={updateDisplay}/>
-      <Number text="4" pressed={updateDisplay}/>
-      <Number text="5" pressed={updateDisplay}/>
-      <Number text="6" pressed={updateDisplay}/>
-      <Number text="7" pressed={updateDisplay}/>
-      <Number text="8" pressed={updateDisplay}/>
-      <Number text="9" pressed={updateDisplay}/>
-      <Number text="0" pressed={updateDisplay}/>
-      <Number text="." pressed={updateDisplay}/>
-      <Operator text="AC"/>
-      <Operator text="+" pressed={updateDisplay}/>
-      <Operator text="-" pressed={updateDisplay}/>
-      <Operator text="*" pressed={updateDisplay}/>
-      <Operator text="/" pressed={updateDisplay}/>
-      <Operator text="=" pressed={updateDisplay}/>
+      <Screen display={display}/>
+      <Screen display={expression}/>
+      <Number number="0" pressed={numberPress}/>
+      <Number number="1" pressed={numberPress}/>
+      <Number number="2" pressed={numberPress}/>
+      <Number number="3" pressed={numberPress}/>
+      <Number number="4" pressed={numberPress}/>
+      <Number number="5" pressed={numberPress}/>
+      <Number number="6" pressed={numberPress}/>
+      <Number number="7" pressed={numberPress}/>
+      <Number number="8" pressed={numberPress}/>
+      <Number number="9" pressed={numberPress}/>
+      <Number number="0" pressed={numberPress}/>
+      <Number number="." pressed={numberPress}/>
+      <Operator operator="AC" pressed={operatorPress}/>
+      <Operator operator="+" pressed={operatorPress}/>
+      <Operator operator="-" pressed={operatorPress}/>
+      <Operator operator="*" pressed={operatorPress}/>
+      <Operator operator="/" pressed={operatorPress}/>
+      <Operator operator="=" pressed={operatorPress}/>
     </div>
   );
 }
 
 export default App;
+
+//pseudo code of what I want to achieve
+//numbers combine as a string until operator is pressed.
+//then store number as x1
+
