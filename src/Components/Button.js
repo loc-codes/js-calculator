@@ -2,6 +2,7 @@
 const Button = (props) => {
     const handleClick = () => {
         console.log('you clicked ' + props.text)
+        props.pressed(props.text)   
     }
 
     return (
