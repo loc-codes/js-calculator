@@ -22,13 +22,16 @@ function App() {
   const [operatorState, setOperatorState] = useState(() => {return false})
 
   const numberPress = (number) => {
+    if (newCalculation === true){
+      setDisplay('display: ')
+      setExpression('')
+      updateOperand('')
+      setNewCalculation(false)
+    }
+
     if (operatorState === true){
       setOperatorState(false)
       setDisplay('display: ')
-    }
-    if (newCalculation === true){
-      setDisplay('display: ')
-      setNewCalculation(false)
     }
     updateOperand(prevOperand => prevOperand += number)
     setDisplay(prevDisplay => prevDisplay += number)
@@ -36,6 +39,8 @@ function App() {
   }
 
   const operatorPress = (operator) => {
+    if (newCalculation === true && expression===''){return ''}
+    else if (newCalculation === true){setNewCalculation(false)}
     if (operatorState === false){
       setOperatorState(true)
       setExpression(prevExpression => prevExpression + operand + operator)
@@ -53,16 +58,12 @@ function App() {
       const answer = eval(prevExpression + operand)
       setDisplay(`display: ${answer}`)
     })
-    updateOperand('')
-    setExpression('')
     setNewCalculation(true)
   }
 
   const clearPress = () => {
-    setExpression('')
-    updateOperand('')
-    setDisplay('display: ')
     setNewCalculation(true)
+    setDisplay('display: ')
   }
 
   return (
@@ -87,6 +88,7 @@ function App() {
       <Operator operator="*" pressed={operatorPress}/>
       <Operator operator="/" pressed={operatorPress}/>
       <Equals pressed={equalsPress}/>
+      <p>Note: This calculator evaluates using BIDMAS order of operations</p>
     </div>
   );
 }
@@ -94,6 +96,7 @@ function App() {
 export default App;
 
 //TO DO:
-//1. Make sure calculator can't press operator twice
+//1. Allow users to continue to operations after pressing equal
 //2. Get decimals working
+//3. Fix double equals bug -> if you press equal twice, you get undefined
 //3. Styling
