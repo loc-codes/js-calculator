@@ -6,6 +6,7 @@ import Equals from "./Components/Equals";
 import Clear from "./Components/Clear";
 
 function App() {
+  const operators = ['+','-','*','/']
   // State 1: The Operand State
   const [operand, updateOperand] = useState(() => {return ''})
 
@@ -15,14 +16,8 @@ function App() {
   //State 3: The Display
   const [display, setDisplay] = useState(() => {return 'display:'})
   
-  //State 4: New Calculation
-  const [newCalculation, setNewCalculation] = useState(() => {return true})
 
   const numberPress = (number) => {
-    if (newCalculation === true){
-      setDisplay('display: ')
-      setNewCalculation(false)
-    }
     updateOperand(prevOperand => prevOperand += number)
     setDisplay(prevDisplay => prevDisplay += number)
     
@@ -56,9 +51,6 @@ function App() {
       const answer = eval(prevExpression + operand)
       setDisplay(`display: ${answer}`)
     })
-    updateOperand('')
-    setExpression('')
-    setNewCalculation(true)
   }
 
   const clearPress = () => {
@@ -96,6 +88,6 @@ function App() {
 export default App;
 
 //TO DO:
-//1. Make sure calculator can't press operator twice
-//2. Get decimals working
-//3. Styling
+//1. Fix operators display
+//2. Make it sure it can do two expressions
+//3. Get decimals working
