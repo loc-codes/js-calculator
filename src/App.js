@@ -3,9 +3,10 @@ import Number from "./Components/Number";
 import Screen from "./Components/Screen";
 import Operator from "./Components/Operator";
 import Equals from "./Components/Equals";
+import Clear from "./Components/Clear";
 
 function App() {
-  
+  const operators = ['+','-','*','/']
   // State 1: The Operand State
   const [operand, updateOperand] = useState(() => {return ''})
 
@@ -17,7 +18,6 @@ function App() {
   
 
   const numberPress = (number,display) => {
-    if (display.slice(-1) == '+'){setDisplay('display: ')}
     updateOperand(prevOperand => prevOperand += number)
     setDisplay(prevDisplay => prevDisplay += number)
     
@@ -33,8 +33,13 @@ function App() {
     setExpression(prevExpression => {
       const answer = eval(prevExpression + operand)
       setDisplay(`display: ${answer}`)
-      return answer
     })
+  }
+
+  const clearPress = () => {
+    setExpression('')
+    updateOperand('')
+    setDisplay('display: ')
   }
 
   return (
@@ -53,19 +58,20 @@ function App() {
       <Number number="9" display={display} pressed={numberPress}/>
       <Number number="0" display={display} pressed={numberPress}/>
       <Number number="." display={display} pressed={numberPress}/>
-      <Operator operator="AC" pressed={operatorPress}/>
+      <Clear pressed={clearPress}/>
       <Operator operator="+" pressed={operatorPress}/>
       <Operator operator="-" pressed={operatorPress}/>
       <Operator operator="*" pressed={operatorPress}/>
       <Operator operator="/" pressed={operatorPress}/>
-      <Equals operator="=" pressed={equalsPress}/>
+      <Equals pressed={equalsPress}/>
     </div>
   );
 }
 
 export default App;
 
-//pseudo code of what I want to achieve
-//numbers combine as a string until operator is pressed.
-//then store number as x1
-
+//TO DO:
+//1. Fix operators display
+//2. Make it sure it can do two expressions
+//3. Get AC working
+//4. Get decimals working
