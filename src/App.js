@@ -6,7 +6,6 @@ import Equals from "./Components/Equals";
 import Clear from "./Components/Clear";
 
 function App() {
-  const operators = ['+','-','*','/']
   // State 1: The Operand State
   const [operand, updateOperand] = useState(() => {return ''})
 
