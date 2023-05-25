@@ -6,6 +6,7 @@ import Equals from "./Components/Equals";
 import Clear from "./Components/Clear";
 
 function App() {
+  const operators = ['+','-','*','/']
   // State 1: The Operand State
   const [operand, updateOperand] = useState(() => {return ''})
 
@@ -18,19 +19,11 @@ function App() {
   //State 4: New Calculation
   const [newCalculation, setNewCalculation] = useState(() => {return true})
 
-  //State 5: Operator State
-  const [operatorState, setOperatorState] = useState({status: false, operator: ''});
-
   const numberPress = (number) => {
     if (newCalculation === true){
       setDisplay('display: ')
       setNewCalculation(false)
     }
-
-    if (operatorState.status === true){
-      setExpression(prevExpression => prevExpression + operatorState.operator)
-    }
-
     updateOperand(prevOperand => prevOperand += number)
     setDisplay(prevDisplay => prevDisplay += number)
     
@@ -60,22 +53,19 @@ function App() {
   }
 
   const equalsPress = () => {
-    //if (operatorState === false){
-      setExpression(prevExpression => {
-        const answer = eval(prevExpression + operand)
-        setDisplay(`display: ${answer}`)
-      })
-      updateOperand('')
-      setExpression('')
-      setNewCalculation(true)
-    //}
+    setExpression(prevExpression => {
+      const answer = eval(prevExpression + operand)
+      setDisplay(`display: ${answer}`)
+    })
+    updateOperand('')
+    setExpression('')
+    setNewCalculation(true)
   }
 
   const clearPress = () => {
     setExpression('')
     updateOperand('')
     setDisplay('display: ')
-    setNewCalculation(true)
   }
 
   return (
@@ -110,9 +100,3 @@ export default App;
 //1. Make sure calculator can't press operator twice
 //2. Get decimals working
 //3. Styling
-
-
-//ideas on how to not press an operator twice
-//1. isOperand? 
-//if operand, pressing an operator adds operator to expression
-//else pressing operator changes operator in expression
