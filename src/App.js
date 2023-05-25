@@ -7,74 +7,81 @@ import Clear from "./Components/Clear";
 
 function App() {
   // State 1: The Operand State
-  const [operand, updateOperand] = useState(() => {return ''})
+  const [operand, setOperand] = useState(() => {return ''})
 
-  //State 2: The Expression State
+  //State 2: The Operator State
+  const [currentOperator, setOperator] = useState(() => {return ''})
+
+  //State 3: The Decimal State
+  const [decimal, setDecimal] = useState(() => {return false})
+
+  //State 4: The Expression 
   const [expression, setExpression] = useState(() => {return ''})
 
-  //State 3: The Display
-  const [display, setDisplay] = useState(() => {return 'display:'})
-  
-  //State 4: New Calculation
-  const [newCalculation, setNewCalculation] = useState(() => {return true})
+  //State 5: The Display
+  const [display, setDisplay] = useState(() => {return 'display: 0'})
 
-  //State 5: Operator State
-  const [operatorState, setOperatorState] = useState(() => {return false})
-
-  //State 6: Result
-  const [result, setResult] = useState(() => {return false})
+  //State 6: The Result
+  const [result, setResult] = useState(() => {return ''})
 
   const numberPress = (number) => {
-    if (result != false)
-      setDisplay('display: ')
+    //after equals logic
+    if (result != '' && currentOperator === '' && operand == ''){
+      setResult('')
       setExpression('')
-      updateOperand('')
-      setNewCalculation(false)
+      setDisplay('display: 0')
     }
 
-    if (operatorState === true){
-      setOperatorState(false)
+    //after operator logic
+    if (currentOperator != ''){
+      setExpression(prevExpression => prevExpression + currentOperator)
+      setOperator('')
       setDisplay('display: ')
     }
-    updateOperand(prevOperand => prevOperand += number)
-    setDisplay(prevDisplay => prevDisplay += number)
+
+    //first press zero logic
+    if (number === '0' && operand === ''){console.log('pass')}
+
+    else{
+    //number on screen logic
+    setOperand(prevOperand => prevOperand + number)
+    if (display === 'display: 0'){    //blank screen logic 
+      setDisplay(`display: ${number}`)
+      setExpression('')  
+    }
+    else{
+    setDisplay(prevDisplay => prevDisplay + number)
+    }
+  }
+  }
     
-  }
-
   const operatorPress = (operator) => {
+    let newOperand = operand //added to deal with async
+
+    //after equals logic
+    if (result !== '') {newOperand = result}
+
+    //blank screen logic
+    if (expression === '' && operand === ''){newOperand = '0'}
+
+    //after number logic
+    if (currentOperator === ''){
+      setExpression(prevExpression => prevExpression + newOperand)
+      setOperand('')
+    }
+
+    setOperator(operator)
     setDisplay(`display: ${operator}`)
-
-    if (operatorState === false){
-      setOperatorState(true)
-      if (result != false){
-        setExpression(prevExpression => prevExpression + operator)
-      }
-
-      else if (result === false){
-        setExpression(prevExpression => prevExpression + operand + operator)
-      }
-      updateOperand('')
-    }
-    else if (operatorState === true){
-      setExpression(prevExpression => prevExpression.slice(0,-1) + operator)
-    }
   }
+    
 
   const equalsPress = () => {
-    setExpression(prevExpression => {
-      const newExpression = prevExpression + operand
-      const answer = eval(newExpression)
-
-      setResult(answer)
-      setDisplay(`display: ${answer}`)
-
-      return newExpression
-    })
+    //TO DO: we need to clear the operand
   }
+    
 
   const clearPress = () => {
-    setResult(false)
-    setDisplay('display: ')
+
   }
 
   return (
