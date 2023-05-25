@@ -26,10 +26,8 @@ function App() {
 
   const numberPress = (number) => {
     //after equals logic
-    if (result != '' && currentOperator === '' && operand == ''){
-      setResult('')
-      setExpression('')
-      setDisplay('display: 0')
+    if (result !== '' && currentOperator === '' && operand === ''){
+      clearPress()
     }
 
     //after operator logic
@@ -45,24 +43,23 @@ function App() {
     else{
     //number on screen logic
     setOperand(prevOperand => prevOperand + number)
-    if (display === 'display: 0'){    //blank screen logic 
-      setDisplay(`display: ${number}`)
-      setExpression('')  
+      if (display === 'display: 0'){    //blank screen logic 
+        setDisplay(`display: ${number}`)
+        setExpression('')  
+      }
+      else{
+      setDisplay(prevDisplay => prevDisplay + number)
+      }
+     }
     }
-    else{
-    setDisplay(prevDisplay => prevDisplay + number)
-    }
-  }
-  }
     
   const operatorPress = (operator) => {
     let newOperand = operand //added to deal with async
 
-    //after equals logic
-    if (result !== '') {newOperand = result}
+    //after equals logic - implicit
 
     //blank screen logic
-    if (expression === '' && operand === ''){newOperand = '0'}
+    if (expression === '' && operand === '' && result === ''){newOperand = '0'}
 
     //after number logic
     if (currentOperator === ''){
@@ -77,17 +74,40 @@ function App() {
 
   const equalsPress = () => {
     //TO DO: we need to clear the operand
+    if(currentOperator !== ''){
+      setExpression(prevExpression => {
+        
+      })
+      
+    }
+
+    else if(currentOperator === ''){
+      setExpression(prevExpression => {
+        const evalExpression = prevExpression + operand
+        const answer = eval(evalExpression)
+        setResult(answer)
+        setDisplay(`display: ${answer}`)
+        return answer
+      })
+    }
+
+    setOperand('')
+    setOperator('')
   }
     
 
   const clearPress = () => {
-
-  }
+      setOperand('')
+      setOperator('')
+      setResult('')
+      setExpression('')
+      setDisplay('display: ')
+    }
 
   return (
     <div className="App">
       <Screen display={display}/>
-      <Screen display={expression}/>
+      {/*<Screen display={expression}/>*/}
       <Number number="0" pressed={numberPress}/>
       <Number number="1" pressed={numberPress}/>
       <Number number="2" pressed={numberPress}/>
