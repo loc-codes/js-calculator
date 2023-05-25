@@ -18,7 +18,14 @@ function App() {
   //State 4: New Calculation
   const [newCalculation, setNewCalculation] = useState(() => {return true})
 
+  //State 5: Operator State
+  const [operatorState, setOperatorState] = useState(() => {return false})
+
   const numberPress = (number) => {
+    if (operatorState === true){
+      setOperatorState(false)
+      setDisplay('display: ')
+    }
     if (newCalculation === true){
       setDisplay('display: ')
       setNewCalculation(false)
@@ -29,9 +36,16 @@ function App() {
   }
 
   const operatorPress = (operator) => {
-    setExpression(prevExpression => prevExpression + operand + operator)
-    updateOperand('')
-    setDisplay(`display: ${operator}`)
+    if (operatorState === false){
+      setOperatorState(true)
+      setExpression(prevExpression => prevExpression + operand + operator)
+      updateOperand('')
+      setDisplay(`display: ${operator}`)
+    }
+    else if (operatorState === true){
+      setExpression(prevExpression => prevExpression.slice(0,-1) + operator)
+      setDisplay(`display: ${operator}`)
+    }
   }
 
   const equalsPress = () => {
