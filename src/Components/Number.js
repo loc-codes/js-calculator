@@ -2,7 +2,7 @@
 const Number = (props) => {
     const handleClick = () => {
         console.log('you clicked ' + props.number)
-        props.pressed(props.number)
+        props.pressed(props.number, props.display)
     }
 
     return (
