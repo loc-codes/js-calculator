@@ -37,21 +37,23 @@ function App() {
       setDisplay('display: ')
     }
 
-    //first press zero logic
-    if (number === '0' && operand === ''){console.log('pass')}
-
-    else{
-    //number on screen logic
-    setOperand(prevOperand => prevOperand + number)
-      if (display === 'display: 0'){    //blank screen logic 
-        setDisplay(`display: ${number}`)
-        setExpression('')  
-      }
-      else{
-      setDisplay(prevDisplay => prevDisplay + number)
-      }
-     }
+    //press zero logic
+    if (number !== '0' && operand[0] === '0' && operand[1] !== '.') {
+      setOperand(number);
+    } 
+    else {
+      setOperand(prevOperand => prevOperand + number)
     }
+
+    if (display === 'display: 0'){    //blank screen logic 
+      setDisplay(`display: ${number}`)
+      //setExpression('')  
+    }
+    else{
+    setDisplay(prevDisplay => prevDisplay + number)
+    }
+  }
+    
 
   const decimalPress = (number) => {
     if (decimal === true){
@@ -115,7 +117,7 @@ function App() {
   return (
     <div className="App">
       <Screen display={display}/>
-      {/*<Screen display={expression}/>*/}
+      <Screen display={expression}/>
       <Number number="0" pressed={numberPress}/>
       <Number number="1" pressed={numberPress}/>
       <Number number="2" pressed={numberPress}/>
@@ -145,4 +147,3 @@ export default App;
 //1. Get decimals working
 //2. Test cases
 //3. styling
-//4. Error when trying at add zeros
