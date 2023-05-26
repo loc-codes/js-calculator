@@ -84,11 +84,24 @@ function App() {
     if (currentOperator === ''){
       setExpression(prevExpression => prevExpression + newOperand)
       setOperand('')
+      setOperator(operator)
+      setDisplay(`${operator}`)
+      setDecimal(false)
     }
 
-    setOperator(operator)
-    setDisplay(`${operator}`)
-    setDecimal(false)
+    else if (currentOperator !== '' && operator === '-'){
+      setOperator(prevOperator => {
+        const newOperator = prevOperator + operator
+        setDisplay(newOperator)
+        return newOperator})
+    }
+
+    else {
+      setOperator(operator)
+      setDisplay(`${operator}`)
+    }
+    
+    
   }
     
 
@@ -143,14 +156,5 @@ function App() {
 export default App;
 
 //TO DO:
-//2. Test cases
-//3. styling
-//4. refactor
-//5. Test case: If 2 or more operators are entered 
-//consecutively, the operation performed should be 
-//the last operator entered (excluding the negative 
-//(-) sign). For example, if 5 + * 7 = is entered, 
-//the result should be 35 (i.e. 5 * 7); if 5 * - 5 
-//= is entered, the result should be -25
-
-//6. Fix rounding errors, round answer to 4-8 dp
+//1. styling
+//2. refactor
