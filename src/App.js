@@ -52,11 +52,28 @@ function App() {
       }
      }
     }
+
+  const decimalPress = (number) => {
+    if (decimal === true){
+
+    }
+    else{
+      if (currentOperator !== '' && decimal === false){
+        setOperand("0.")
+        setOperator('')
+      }
+
+      else if (currentOperator === '' && decimal === false){
+        setOperand(prevOperand => prevOperand + ".")
+      }
+
+      setDecimal(true)
+      setDisplay(prevDisplay => prevDisplay + number)
+    }
+  }
     
   const operatorPress = (operator) => {
     let newOperand = operand //added to deal with async
-
-    //after equals logic - implicit
 
     //blank screen logic
     if (expression === '' && operand === '' && result === ''){newOperand = '0'}
@@ -69,6 +86,7 @@ function App() {
 
     setOperator(operator)
     setDisplay(`display: ${operator}`)
+    setDecimal(false)
   }
     
 
@@ -102,6 +120,7 @@ function App() {
       setResult('')
       setExpression('')
       setDisplay('display: ')
+      setDecimal(false)
     }
 
   return (
@@ -119,7 +138,7 @@ function App() {
       <Number number="8" pressed={numberPress}/>
       <Number number="9" pressed={numberPress}/>
       <Number number="0" pressed={numberPress}/>
-      <Number number="." pressed={numberPress}/>
+      <Number number="." pressed={decimalPress}/>
       <Clear pressed={clearPress}/>
       <Operator operator="+" pressed={operatorPress}/>
       <Operator operator="-" pressed={operatorPress}/>
@@ -134,7 +153,7 @@ function App() {
 export default App;
 
 //TO DO:
-//1. Allow users to continue to operations after pressing equal
-//2. Get decimals working
-//3. Fix double equals bug -> if you press equal twice, you get undefined
-//3. Styling
+//1. Get decimals working
+//2. Test cases
+//3. styling
+//4. Error when trying at add zeros
