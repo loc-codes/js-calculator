@@ -6,9 +6,7 @@ const Operator = (props) => {
     }
 
     return (
-        <button onClick={handleClick}>
-            <p>{props.operator}</p>
-        </button>
+        <button id={props.id} onClick={handleClick}>{props.operator}</button>
     )
 }
 

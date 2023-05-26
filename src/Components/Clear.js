@@ -5,9 +5,7 @@ const Clear = (props) => {
     }
 
     return (
-        <button onClick={handleClick}>
-            <p>AC</p>
-        </button>
+        <button id={props.id} onClick={handleClick}>AC</button>
     )
 }
 

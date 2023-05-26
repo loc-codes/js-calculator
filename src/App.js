@@ -19,7 +19,7 @@ function App() {
   const [expression, setExpression] = useState(() => {return ''})
 
   //State 5: The Display
-  const [display, setDisplay] = useState(() => {return 'display: 0'})
+  const [display, setDisplay] = useState(() => {return '0'})
 
   //State 6: The Result
   const [result, setResult] = useState(() => {return ''})
@@ -34,7 +34,7 @@ function App() {
     if (currentOperator != ''){
       setExpression(prevExpression => prevExpression + currentOperator)
       setOperator('')
-      setDisplay('display: ')
+      setDisplay('')
     }
 
     //handle leading zero logic
@@ -47,8 +47,8 @@ function App() {
 
     //handle decimal logic
 
-    if (display === 'display: 0'){    //blank screen logic 
-      setDisplay(`display: ${number}`)
+    if (display === '0'){    //blank screen logic 
+      setDisplay(`${number}`)
     }
     else{
       setDisplay(prevDisplay => prevDisplay + number)
@@ -87,7 +87,7 @@ function App() {
     }
 
     setOperator(operator)
-    setDisplay(`display: ${operator}`)
+    setDisplay(`${operator}`)
     setDecimal(false)
   }
     
@@ -97,7 +97,7 @@ function App() {
         const evalExpression = prevExpression + operand
         const answer = eval(evalExpression)
         setResult(answer)
-        setDisplay(`display: ${answer}`)
+        setDisplay(`${answer}`)
         return answer
       })
     setOperand('')
@@ -110,32 +110,31 @@ function App() {
       setOperator('')
       setResult('')
       setExpression('')
-      setDisplay('display: ')
+      setDisplay('0')
       setDecimal(false)
     }
 
   return (
     <div className="App">
-      <Screen display={display}/>
-      <Screen display={expression}/>
-      <Number number="0" pressed={numberPress}/>
-      <Number number="1" pressed={numberPress}/>
-      <Number number="2" pressed={numberPress}/>
-      <Number number="3" pressed={numberPress}/>
-      <Number number="4" pressed={numberPress}/>
-      <Number number="5" pressed={numberPress}/>
-      <Number number="6" pressed={numberPress}/>
-      <Number number="7" pressed={numberPress}/>
-      <Number number="8" pressed={numberPress}/>
-      <Number number="9" pressed={numberPress}/>
-      <Number number="0" pressed={numberPress}/>
-      <Number number="." pressed={decimalPress}/>
-      <Clear pressed={clearPress}/>
-      <Operator operator="+" pressed={operatorPress}/>
-      <Operator operator="-" pressed={operatorPress}/>
-      <Operator operator="*" pressed={operatorPress}/>
-      <Operator operator="/" pressed={operatorPress}/>
-      <Equals pressed={equalsPress}/>
+      <Screen id="display" display={display}/>
+      <Number id="zero" number="0" pressed={numberPress}/>
+      <Number id="one" number="1" pressed={numberPress}/>
+      <Number id="two" number="2" pressed={numberPress}/>
+      <Number id="three" number="3" pressed={numberPress}/>
+      <Number id="four" number="4" pressed={numberPress}/>
+      <Number id="five" number="5" pressed={numberPress}/>
+      <Number id="six" number="6" pressed={numberPress}/>
+      <Number id="seven" number="7" pressed={numberPress}/>
+      <Number id="eight" number="8" pressed={numberPress}/>
+      <Number id="nine" number="9" pressed={numberPress}/>
+      <Number id="zero" number="0" pressed={numberPress}/>
+      <Number id="decimal" number="." pressed={decimalPress}/>
+      <Clear id="clear" pressed={clearPress}/>
+      <Operator id="add" operator="+" pressed={operatorPress}/>
+      <Operator id="subtract" operator="-" pressed={operatorPress}/>
+      <Operator id="multiply" operator="*" pressed={operatorPress}/>
+      <Operator id="divide" operator="/" pressed={operatorPress}/>
+      <Equals id="equals" pressed={equalsPress}/>
       <p>Note: This calculator evaluates using BIDMAS order of operations</p>
     </div>
   );
@@ -147,3 +146,11 @@ export default App;
 //2. Test cases
 //3. styling
 //4. refactor
+//5. Test case: If 2 or more operators are entered 
+//consecutively, the operation performed should be 
+//the last operator entered (excluding the negative 
+//(-) sign). For example, if 5 + * 7 = is entered, 
+//the result should be 35 (i.e. 5 * 7); if 5 * - 5 
+//= is entered, the result should be -25
+
+//6. Fix rounding errors, round answer to 4-8 dp

@@ -5,9 +5,7 @@ const Equals = (props) => {
     }
 
     return (
-        <button onClick={handleClick}>
-            <p>=</p>
-        </button>
+        <button id={props.id} onClick={handleClick}>=</button>
     )
 }
 

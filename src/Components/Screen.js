@@ -1,6 +1,6 @@
 const Screen = (props) => {
     return(
-        <p>{props.display}</p>
+        <p id={props.id}>{props.display}</p>
     )
 }
 
