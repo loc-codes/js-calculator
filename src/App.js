@@ -37,20 +37,21 @@ function App() {
       setDisplay('display: ')
     }
 
-    //press zero logic
-    if (number !== '0' && operand[0] === '0' && operand[1] !== '.') {
+    //handle leading zero logic
+    if (number !== '0' && operand[0] === '0' && operand[1] !== '.' && !decimal) {
       setOperand(number);
     } 
     else {
       setOperand(prevOperand => prevOperand + number)
     }
 
+    //handle decimal logic
+
     if (display === 'display: 0'){    //blank screen logic 
       setDisplay(`display: ${number}`)
-      //setExpression('')  
     }
     else{
-    setDisplay(prevDisplay => prevDisplay + number)
+      setDisplay(prevDisplay => prevDisplay + number)
     }
   }
     
@@ -61,16 +62,15 @@ function App() {
     }
     else{
       if (currentOperator !== '' && decimal === false){
-        setOperand("0.")
-        setOperator('')
       }
 
       else if (currentOperator === '' && decimal === false){
         setOperand(prevOperand => prevOperand + ".")
+        setDecimal(true)
+        setDisplay(prevDisplay => prevDisplay + number)
       }
 
-      setDecimal(true)
-      setDisplay(prevDisplay => prevDisplay + number)
+      
     }
   }
     
@@ -144,6 +144,6 @@ function App() {
 export default App;
 
 //TO DO:
-//1. Get decimals working
 //2. Test cases
 //3. styling
+//4. refactor
