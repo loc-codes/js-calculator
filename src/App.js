@@ -55,7 +55,7 @@ function App() {
 
   const decimalPress = (number) => {
     if (decimal === true){
-
+      //pass
     }
     else{
       if (currentOperator !== '' && decimal === false){
@@ -91,24 +91,13 @@ function App() {
     
 
   const equalsPress = () => {
-    //TO DO: we need to clear the operand
-    if(currentOperator !== ''){
-      setExpression(prevExpression => {
-        
-      })
-      
-    }
-
-    else if(currentOperator === ''){
-      setExpression(prevExpression => {
+    setExpression(prevExpression => {
         const evalExpression = prevExpression + operand
         const answer = eval(evalExpression)
         setResult(answer)
         setDisplay(`display: ${answer}`)
         return answer
       })
-    }
-
     setOperand('')
     setOperator('')
   }
