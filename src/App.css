@@ -1,0 +1,154 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#inner {
+    max-width: 700px;
+    min-width: 340px;
+    min-height: 750px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-color: rgb(190, 190, 195);
+    border: 0.75rem solid black;
+    margin: auto;
+    margin-top: 5vh;
+    border-radius: 40px;
+  }
+  
+  
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 1em;
+    width: 90%;
+    height: 90%;
+    
+  
+    grid-template-areas:
+      "logo logo logo logo"
+      "display display display display"
+      "clear clear divide multiply"
+      "seven eight nine subtract"
+      "four five six add"
+      "one two three equals"
+      "zero zero decimal equals";
+  }
+  
+  .button {
+    background-color: rgb(240,235,210);
+    border: 0.6rem solid black;
+    border-radius: 10px;
+    color: black;
+    padding: 2vh 1vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 550;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #cdc02b;
+  }
+
+  .display {
+    font-family: 'Roboto Mono', monospace;
+    grid-area: display;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: rgb(240,235,210);
+    background-color: rgb(90,90,90);
+    border: 0.5em solid black; 
+    border-radius: 10px;
+}
+
+  #text {
+    font-size: 2.38rem;
+    margin: 0.1vh 1vw
+  }
+
+  #logo {
+    grid-area: logo;
+    font-size: 3rem;
+    margin-top: 0;
+    font-weight: 500;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    color: rgb(240,235,210)
+  }
+
+
+  #clear {
+    grid-area: clear;
+  }
+  
+  #multiply {
+    grid-area: multiply;
+  }
+  
+  #divide {
+    grid-area: divide;
+  }
+  
+  #seven {
+    grid-area: seven;
+  }
+  
+  #eight {
+    grid-area: eight;
+  }
+  
+  #nine {
+    grid-area: nine;
+  }
+  
+  #subtract {
+    grid-area: subtract;
+  }
+  
+  #four {
+    grid-area: four;
+  }
+  
+  #five {
+    grid-area: five;
+  }
+  
+  #six {
+    grid-area: six;
+  }
+  
+  #add {
+    grid-area: add;
+  }
+  
+  #one {
+    grid-area: one;
+  }
+  
+  #two {
+    grid-area: two;
+  }
+  
+  #three {
+    grid-area: three;
+  }
+  
+  #equals {
+    grid-area: equals;
+  }
+  
+  #zero {
+    grid-area: zero;
+  }
+  
+  #decimal {
+    grid-area: decimal;
+  }
+  

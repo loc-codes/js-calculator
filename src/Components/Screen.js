@@ -1,7 +1,11 @@
 const Screen = (props) => {
-    return(
-        <p id={props.id}>{props.display}</p>
+    return (
+        <div className="display">
+            <p id="text">{props.display}</p>
+        </div>
     )
 }
+
+
 
 export default Screen

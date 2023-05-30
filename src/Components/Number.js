@@ -6,7 +6,7 @@ const Number = (props) => {
     }
 
     return (
-        <button id={props.id} onClick={handleClick}>{props.number}</button>
+        <button className="number button" id={props.id} onClick={handleClick}>{props.number}</button>
     )
 }
 

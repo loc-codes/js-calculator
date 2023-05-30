@@ -4,6 +4,7 @@ import Screen from "./Components/Screen";
 import Operator from "./Components/Operator";
 import Equals from "./Components/Equals";
 import Clear from "./Components/Clear";
+import "./App.css"
 
 function App() {
   // State 1: The Operand State
@@ -41,7 +42,7 @@ function App() {
     if (number !== '0' && operand[0] === '0' && operand[1] !== '.' && !decimal) {
       setOperand(number);
     } 
-    else {
+    else if (display.length < 11) { // limit to 12 digits
       setOperand(prevOperand => prevOperand + number)
     }
 
@@ -50,7 +51,7 @@ function App() {
     if (display === '0'){    //blank screen logic 
       setDisplay(`${number}`)
     }
-    else{
+    else if (display.length < 11) {
       setDisplay(prevDisplay => prevDisplay + number)
     }
   }
@@ -108,7 +109,14 @@ function App() {
   const equalsPress = () => {
     setExpression(prevExpression => {
         const evalExpression = prevExpression + operand
-        const answer = eval(evalExpression)
+        let answer = eval(evalExpression)
+
+        // Format large numbers to fit on the screen
+        if (answer > 99999999999 || answer < -9999999999) {
+          answer = answer.toPrecision(6)
+          
+        }
+
         setResult(answer)
         setDisplay(`${answer}`)
         return answer
@@ -129,26 +137,34 @@ function App() {
 
   return (
     <div className="App">
-      <Screen id="display" display={display}/>
-      <Number id="zero" number="0" pressed={numberPress}/>
-      <Number id="one" number="1" pressed={numberPress}/>
-      <Number id="two" number="2" pressed={numberPress}/>
-      <Number id="three" number="3" pressed={numberPress}/>
-      <Number id="four" number="4" pressed={numberPress}/>
-      <Number id="five" number="5" pressed={numberPress}/>
-      <Number id="six" number="6" pressed={numberPress}/>
-      <Number id="seven" number="7" pressed={numberPress}/>
-      <Number id="eight" number="8" pressed={numberPress}/>
-      <Number id="nine" number="9" pressed={numberPress}/>
-      <Number id="zero" number="0" pressed={numberPress}/>
-      <Number id="decimal" number="." pressed={decimalPress}/>
-      <Clear id="clear" pressed={clearPress}/>
-      <Operator id="add" operator="+" pressed={operatorPress}/>
-      <Operator id="subtract" operator="-" pressed={operatorPress}/>
-      <Operator id="multiply" operator="*" pressed={operatorPress}/>
-      <Operator id="divide" operator="/" pressed={operatorPress}/>
-      <Equals id="equals" pressed={equalsPress}/>
-      <p>Note: This calculator evaluates using BIDMAS order of operations</p>
+      <div id="inner">
+        
+        
+        
+        <div className="grid" id="keyboard">
+        <p id="logo">Loc.calculator</p>
+        <Screen id="display" display={display}/>
+        <Clear id="clear" pressed={clearPress}/>
+        <Operator id="multiply" operator="*" pressed={operatorPress}/>
+        <Operator id="divide" operator="/" pressed={operatorPress}/>
+        <Number id="seven" number="7" pressed={numberPress}/>
+        <Number id="eight" number="8" pressed={numberPress}/>
+        <Number id="nine" number="9" pressed={numberPress}/>
+        <Operator id="subtract" operator="-" pressed={operatorPress}/>
+        <Number id="four" number="4" pressed={numberPress}/>
+        <Number id="five" number="5" pressed={numberPress}/>
+        <Number id="six" number="6" pressed={numberPress}/>
+        <Number id="one" number="1" pressed={numberPress}/>
+        <Number id="two" number="2" pressed={numberPress}/>
+        <Number id="three" number="3" pressed={numberPress}/>
+        <Operator id="add" operator="+" pressed={operatorPress}/>
+        <Number id="zero" number="0" pressed={numberPress}/>
+        <Number id="decimal" number="." pressed={decimalPress}/>
+        <Equals id="equals" pressed={equalsPress}/>
+      </div>
+
+
+      </div>
     </div>
   );
 }

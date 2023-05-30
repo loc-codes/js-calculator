@@ -5,7 +5,7 @@ const Equals = (props) => {
     }
 
     return (
-        <button id={props.id} onClick={handleClick}>=</button>
+        <button className="button" id={props.id} onClick={handleClick}>=</button>
     )
 }
 
