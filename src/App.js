@@ -170,7 +170,3 @@ function App() {
 }
 
 export default App;
-
-//TO DO:
-//1. styling
-//2. refactor
